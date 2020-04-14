@@ -1,5 +1,4 @@
 import request from '@/utils/request';
-import { stringify } from 'qs';
 import moment from 'moment';
 
 export async function queryRule({current, pageSize}, {month}) {
@@ -13,10 +12,12 @@ export async function queryRule({current, pageSize}, {month}) {
   });
 }
 
-export async function exportExcel(params) {
+export async function exportExcel({month}) {
+  const data = new FormData();
+  data.append('month', moment(month).format('YYYY-MM'));
   return request('dingtalk/scan/list/export', {
     method: 'POST',
-    data: stringify(params),
+    data,
     responseType: 'blob',
     getResponse: true,
   })
