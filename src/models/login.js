@@ -43,7 +43,7 @@ const Model = {
 
     logout() {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
-
+      if(localStorage) localStorage.removeItem('antd-pro-authority');
       if (window.location.pathname !== '/user/login' && !redirect) {
         history.replace({
           pathname: '/user/login',

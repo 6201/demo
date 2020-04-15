@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import request from '@/utils/request';
 
 export async function fakeAccountLogin(params) {
