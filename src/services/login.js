@@ -13,6 +13,11 @@ export async function fakeAccountLogin(params) {
           status: 'ok',
           currentAuthority: 'admin',
         })
+      } else if ( params.password === 'pldadmin_2020' && params.userName === 'pldadmin') {
+        resolve({
+          status: 'ok',
+          currentAuthority: 'user',
+        })
       } else {
         reject()
       }
