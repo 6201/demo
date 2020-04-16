@@ -6,13 +6,15 @@ export async function fakeAccountLogin(params) {
   //   method: 'POST',
   //   data: params,
   // });
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if(params.password === 'ythadmin_2020' && params.userName === 'ythadmin') {
         resolve({
           status: 'ok',
           currentAuthority: 'admin',
         })
+      } else {
+        reject()
       }
     }, 100)
   })
