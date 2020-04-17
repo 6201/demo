@@ -17,9 +17,9 @@ export default defineConfig({
     antd: true,
     baseNavigator: true,
   },
-  dynamicImport: {
-    loading: '@/components/PageLoading/index',
-  },
+  // dynamicImport: {
+    // loading: '@/components/PageLoading/index',
+  // },
   targets: {
     ie: 11,
   },
