@@ -23,6 +23,7 @@ export default {
   'menu.form.advanced-form': 'Formulário Avançado',
   'menu.list': 'Lista',
   'menu.list.table-list': 'Tabela de Busca',
+  'menu.list.mortgage-calculator': 'Calculadora de hipoteca',
   'menu.list.basic-list': 'Lista Básica',
   'menu.list.card-list': 'Lista de Card',
   'menu.list.search-list': 'Lista de Busca',

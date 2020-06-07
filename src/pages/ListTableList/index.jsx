@@ -87,7 +87,6 @@ const TableList = () => {
           {...tableProps}
         />
       </Card>
-
     </PageHeaderWrapper>
   );
 };

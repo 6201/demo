@@ -78,6 +78,12 @@ export default defineConfig({
               component: './ListTableList',
             },
             {
+              name: 'list.mortgage-calculator',
+              icon: 'right',
+              path: '/conter',
+              component: './MortgageCalculator'
+            },
+            {
               component: './404',
             },
           ],
