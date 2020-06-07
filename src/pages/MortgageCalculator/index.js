@@ -10,6 +10,10 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 8 },
 };
+const towLayout ={
+  labelCol: { span: 8 },
+  wrapperCol: { span: 10 },
+}
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
@@ -37,15 +41,18 @@ const monthOption = () => {
 const MortgageCaluculator = () => {
 
   const option = monthOption();
-  const [values, setValues] = useState({
+  const initValue = {
     paymentMethod: 1,
     mortgageType: 1,
     total: 100,
+    gTotal: 100,
+    sTotal: 100,
     month: 240,
     lv: 3.25,
     glv: 3.25,
     slv: 4.90
-  });
+  }
+  const [values, setValues] = useState(initValue);
   const [isShowResult, setIsShowResult] = useState(false)
   const [form] = Form.useForm();
 
@@ -97,13 +104,32 @@ const MortgageCaluculator = () => {
               </Radio.Group>
             </Item>
             <Item
-              label="贷款总额"
-              name="total"
-              rules={[
-                { required: true, message: '贷款总额不能为空' }
-              ]}
+              noStyle
+              shouldUpdate={(prevValues, currentValues) => prevValues.mortgageType !== currentValues.mortgageType}
             >
-              <Input placeholder="请输入贷款总额" style={{width: 250}} addonAfter="万元" />
+              {({ getFieldValue }) => {
+                return getFieldValue('mortgageType') !== 3 ? (
+                  <Item
+                    label="贷款总额"
+                    name="total"
+                    rules={[
+                      { required: true, message: '贷款总额不能为空' }
+                    ]}
+                  >
+                    <Input placeholder="请输入贷款总额" style={{width: 290}} addonAfter="万元" />
+                  </Item>
+                ) : (
+                  <Item {...towLayout} label="贷款金额">
+                    <Item {...layout} label="使用公积金贷款:" name="gTotal">
+                      <Input placeholder="公积金贷款总额" style={{width: 170}} addonAfter="万元" />
+                    </Item>
+                    <Item {...layout} label="使用商业性贷款:" name="sTotal">
+                      <Input placeholder="商业贷款总额" style={{width: 170}} addonAfter="万元" />
+                    </Item>
+                  </Item>
+                )
+              }}
+
             </Item>
             <Item
               label="按揭年数"
@@ -112,7 +138,7 @@ const MortgageCaluculator = () => {
                 { required: true, message: '请选择按揭年数' }
               ]}
             >
-              <Select style={{width: 250}} placeholder="请选择按揭年限">
+              <Select style={{width: 290}} placeholder="请选择按揭年限">
                 {option.map(item => {
                   return <Option key={item.value} value={item.value}>{item.label}</Option>
                 })}
@@ -193,6 +219,7 @@ const MortgageCaluculator = () => {
             </Item>
             <Item {...tailLayout}>
               <Button type="primary" htmlType="submit">开始计算</Button>
+              <Button type="link" onClick={() => form.setFieldsValue(initValue)}>清空</Button>
             </Item>
           </Form>
           </Col>
