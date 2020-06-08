@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Form, Button, Radio, Input, Select, InputNumber, Row, Col, List, Tooltip } from 'antd';
+import { Card, Form, Button, Radio, Input, Select, InputNumber, Row, Col, Tooltip } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import ListView from './components/lists';
 
 const { Option } = Select;
 const { Item } = Form;
@@ -62,7 +63,6 @@ const MortgageCaluculator = () => {
     setValues(val);
   }
 
-  const { paymentMethod } = values;
   return (
     <PageHeaderWrapper>
       <Card>
@@ -120,10 +120,18 @@ const MortgageCaluculator = () => {
                   </Item>
                 ) : (
                   <Item {...towLayout} label="贷款金额">
-                    <Item {...layout} label="使用公积金贷款:" name="gTotal">
+                    <Item {...layout} label="使用公积金贷款:" name="gTotal"
+                      rules={[
+                        { required: true, message: '贷款额不能为空' }
+                      ]}
+                    >
                       <Input placeholder="公积金贷款总额" style={{width: 170}} addonAfter="万元" />
                     </Item>
-                    <Item {...layout} label="使用商业性贷款:" name="sTotal">
+                    <Item {...layout} label="使用商业性贷款:" name="sTotal"
+                      rules={[
+                        { required: true, message: '贷款额不能为空' }
+                      ]}
+                    >
                       <Input placeholder="商业贷款总额" style={{width: 170}} addonAfter="万元" />
                     </Item>
                   </Item>
@@ -226,7 +234,8 @@ const MortgageCaluculator = () => {
           <Col span={8}>
             {isShowResult && (
               <Card>
-                <List
+                <ListView {...values} />
+                {/* <List
                   header={<div>{paymentMethod === 1 ? '等额本息' : '等额本金'}</div>}
                 >
                   <List.Item>
@@ -250,7 +259,7 @@ const MortgageCaluculator = () => {
                   <List.Item>
                     贷款月数：{100}
                   </List.Item>
-                </List>
+                </List> */}
               </Card>
             )}
           </Col>

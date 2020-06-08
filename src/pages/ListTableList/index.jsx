@@ -15,7 +15,6 @@ const TableList = () => {
     form,
     cacheKey: 'tableProps',
     formatResult: response => {
-    console.log("TableList -> response", response)
       return {
         list: response.data.records,
         total: response.data.total
