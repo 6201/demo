@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Table, Card, DatePicker, Form, Button } from 'antd';
+import { Table, Card, DatePicker, Form, Button, Space } from 'antd';
 import { useFormTable, useRequest } from '@umijs/hooks';
 import { down } from '../../utils/utils';
 import { queryRule, exportExcel } from './service';
@@ -54,17 +54,17 @@ const TableList = () => {
 
 
   const searchForm = (
-      <div style={{padding: '0 24px', display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
         <Form form={form}>
           <Form.Item label="选择月份" name="month">
             <DatePicker picker="month" format="YYYY-MM" />
           </Form.Item>
         </Form>
-        <div>
+        <Space size="small">
           <Button type="primary" onClick={submit}>筛选</Button>
           <Button style={{marginLeft: 10}} onClick={reset}>重置</Button>
           <Button style={{marginLeft: 10}} onClick={() => run(form.getFieldsValue())}>导出</Button>
-        </div>
+        </Space>
       </div>
     )
 
